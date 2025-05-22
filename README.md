@@ -12,6 +12,7 @@ In the automotive industry, each material sample is associated with a codified c
 
 - Fullscreen display of images (`.jpg`, `.jpeg`, `.png`)
 - Not Compatable with `.HEIC` for iPhone pictures -> On your iPhone, open Settings → Camera → Formats.
+  
 Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
 - Zoom (mouse wheel) and pan (click-drag)  
 - Fixed 1:1 square crop that you can reposition
