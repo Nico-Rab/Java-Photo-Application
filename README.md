@@ -11,9 +11,8 @@ In the automotive industry, each material sample is associated with a codified c
 ## Features
 
 - Fullscreen display of images (`.jpg`, `.jpeg`, `.png`)
-- Not Compatable with HEIC for iPhone pictures -> On your iPhone, open Settings → Camera → Formats.
+- Not Compatable with `.HEIC` for iPhone pictures -> On your iPhone, open Settings → Camera → Formats.
 Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
-- HEIC Support coming soon!
 - Zoom (mouse wheel) and pan (click-drag)  
 - Fixed 1:1 square crop that you can reposition
 - - **Resizable crop**: You can change the default crop size by modifying the `CROP_SIZE` value in the code  
