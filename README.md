@@ -49,4 +49,3 @@ Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
 ## License
 
 This project is released under the [MIT License](LICENSE).
-Copyright (c) 2025 Nicolas Rabergeau
