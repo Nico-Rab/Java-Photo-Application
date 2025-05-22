@@ -11,17 +11,15 @@ In the automotive industry, each material sample is associated with a codified c
 ## Features
 
 - Fullscreen display of images (`.jpg`, `.jpeg`, `.png`)
-- Not Compatable with `.HEIC` for iPhone pictures -> On your iPhone, open Settings → Camera → Formats.
-  
-Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
+- Not Compatable with `.HEIC` for iPhone pictures -> On your iPhone, open Settings → Camera → Formats. Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
 - Zoom (mouse wheel) and pan (click-drag)  
 - Fixed 1:1 square crop that you can reposition
 - - **Resizable crop**: You can change the default crop size by modifying the `CROP_SIZE` value in the code  
   ```java
   private static final int CROP_SIZE = 200; // change this to adjust default crop size
-- - Enter a **color code** and **grain code** for each image:
-  - Color code: 3 uppercase letters (e.g. `ABC`)
-  - Grain code: 1 uppercase letter + 3 digits (e.g. `Z123`)
+- Enter a **color code** and **grain code** for each image:
+- - Color code: 3 uppercase letters (e.g. `ABC`)
+- - Grain code: 1 uppercase letter + 3 digits (e.g. `Z123`)
 - Optional “Flop” checkbox (picture taken from an angle)  
 - Keyboard shortcuts:  
   - **Ctrl +D** → Delete current image  
