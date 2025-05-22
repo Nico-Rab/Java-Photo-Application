@@ -9,7 +9,10 @@ A simple Java Swing application for batch-renaming and cropping photos with zoom
 Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
 - HEIC Support coming soon!
 - Zoom (mouse wheel) and pan (click-drag)  
-- Fixed 1:1 square crop that you can reposition  
+- Fixed 1:1 square crop that you can reposition
+- - **Resizable crop**: You can change the default crop size by modifying the `CROP_SIZE` value in the code  
+  ```java
+  private static final int CROP_SIZE = 200; // change this to adjust default crop size
 - Enter 3-letter color code and free-form grain code  
 - Optional “Flop” checkbox (picture taken from an angle)  
 - Keyboard shortcuts:  
