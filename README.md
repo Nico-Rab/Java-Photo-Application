@@ -67,7 +67,7 @@ In the automotive industry, each material sample is associated with a codified c
 
 ## Contact
 
-If you encounter any bugs or issues, feel free to report them or reach out via the contact form here:  
+If you encounter any bugs or issues, feel free to report them or reach out via my website contact form here:  
 👉 [Envoyez-moi un message](https://nico-rab.tech/#contact) !
 
 ## License
