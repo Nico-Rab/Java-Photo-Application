@@ -22,7 +22,7 @@ Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
 
 - Java 11 or higher installed  
 - Eclipse IDE 2023-06 (or any recent Eclipse)  
-- (Optional) Image files in `images/` folder  
+- Image files in `images/` folder  
 
 ## Project Structure
 
