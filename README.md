@@ -36,8 +36,7 @@ Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
 
             └── app/
 
-                └── ImageRenamerApp.java
-Main Java Swing application
+                └── ImageRenamerApp.java #Main Java Swing application
 
 ## Usage
 
