@@ -6,7 +6,7 @@ A simple Java Swing application for batch-renaming and cropping photos with zoom
 
 This application was developed during my internship at Stellantis as a practical tool to assist in the visualization and organization of industrial material samples.
 
-In the automotive industry, each material sample is associated with a codified color and grain reference. The tool simplifies the manual process of renaming and cropping photographic samples by allowing fast, keyboard-driven input and high-resolution cropping. It was specifically designed to improve the workflow for reviewing and cataloging visual standards within the internal sample information in Excel.
+In the automotive industry, each material sample is associated with a codified color and grain reference. The tool simplifies the manual process of renaming and cropping photographic samples by allowing fast, keyboard-driven input and cropping. It was specifically designed to improve the workflow for reviewing and cataloging visual standards within the internal sample databases.
 
 
 ### ⚙️ How It Works
