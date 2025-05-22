@@ -8,21 +8,31 @@ This application was developed during my internship at Stellantis as a practical
 
 In the automotive industry, each material sample is associated with a codified color and grain reference. The tool simplifies the manual process of renaming and cropping photographic samples by allowing fast, keyboard-driven input and high-resolution cropping. It was specifically designed to improve the workflow for reviewing and cataloging visual standards within the internal sample information in Excel.
 
+
+### ⚙️ How It Works
+
+- Reads photos from the `images/` folder  
+- Displays them in fullscreen with zoom and pan functionality  
+- Automatically overlays a **movable** 1:1 square crop zone  
+- Lets the user enter:
+  - A **color code** (`ABC`)
+  - A **grain code** (`Z123`)
+  - A checkbox for **“Flop”** (used when the photo is taken from an angle)
+- When the user presses `Ctrl + G` or clicks **Rename & Next**:
+  - The crop area is extracted and saved as a new image
+  - The image is renamed using the format: `ABC-Z123.jpg` or `ABC-Z123_flop.jpg`
+  - The image is saved into a subfolder based on the first two letters of the color code
+  - The original file is deleted from `images/`
+
 ## Features
 
-- Fullscreen display of images (`.jpg`, `.jpeg`, `.png`)
+- Images formats (`.jpg`, `.jpeg`, `.png`)
 - Not Compatable with `.HEIC` for iPhone pictures -> On your iPhone, open Settings → Camera → Formats. Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
-- Zoom (mouse wheel) and pan (click-drag)  
-- Fixed 1:1 square crop that you can reposition
 - - **Resizable crop**: You can change the default crop size by modifying the `CROP_SIZE` value in the code  
   ```java
   private static final int CROP_SIZE = 200; // change this to adjust default crop size
-- Enter a **color code** and **grain code** for each image:
-- - Color code: 3 uppercase letters (e.g. `ABC`)
-- - Grain code: 1 uppercase letter + 3 digits (e.g. `Z123`)
-- Optional “Flop” checkbox (picture taken from an angle)  
 - Keyboard shortcuts:  
-  - **Ctrl +D** → Delete current image  
+  - **Ctrl + D** → Delete current image  
   - **Ctrl + F** → Toggle “Flop”  
   - **Ctrl + G** → Rename & load next  
   - **Esc** → Exit application  
