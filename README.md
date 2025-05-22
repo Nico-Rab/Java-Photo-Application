@@ -19,7 +19,7 @@ Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
 - - **Resizable crop**: You can change the default crop size by modifying the `CROP_SIZE` value in the code  
   ```java
   private static final int CROP_SIZE = 200; // change this to adjust default crop size
-- - Enter a **3-letter color code** (e.g. `ABC`) and a **grain code** (e.g. `Z123`)
+- Enter a **3-letter color code** (e.g. `ABC`) and a **grain code** (e.g. `Z123`)
 - Optional “Flop” checkbox (picture taken from an angle)  
 - Keyboard shortcuts:  
   - **Ctrl +D** → Delete current image  
