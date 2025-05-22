@@ -9,7 +9,7 @@ This application was developed during my internship at Stellantis as a practical
 In the automotive industry, each material sample is associated with a codified color and grain reference. The tool simplifies the manual process of renaming and cropping photographic samples by allowing fast, keyboard-driven input and cropping. It was specifically designed to improve the workflow for reviewing and cataloging visual standards within the internal sample databases.
 
 
-### ⚙️ How It Works
+## ⚙️ How It Works
 
 - Reads photos from the `images/` folder  
 - Displays them in fullscreen with zoom and pan functionality  
