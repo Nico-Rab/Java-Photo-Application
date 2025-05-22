@@ -35,8 +35,10 @@ Put your source photos here (jpg, png, etc.)
 Cropped & renamed photos are saved here
 
 └── src/
-└── app/
-└── ImageRenamerApp.java
+
+  └── app/
+
+    └── ImageRenamerApp.java
 Main Java Swing application
 
 ## Usage
