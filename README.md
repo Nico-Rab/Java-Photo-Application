@@ -46,6 +46,11 @@ Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
 4. **Run** `app.ImageRenamerApp` as a Java Application.  
 5. Use the toolbar or shortcuts to rename, crop, delete, and advance.
 
+## Contact
+
+If you encounter any bugs or issues, feel free to report them or reach out via the contact form here:  
+👉 [https://nico-rab.tech/#contact](https://nico-rab.tech/#contact)
+
 ## License
 
 This project is released under the [MIT License](LICENSE).
