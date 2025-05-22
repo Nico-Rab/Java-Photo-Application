@@ -23,10 +23,10 @@ In the automotive industry, each material sample is associated with a codified c
   - The image is renamed using the format: `ABC-Z123.jpg` or `ABC-Z123_flop.jpg`
   - The image is renamed using the format: `ABC-Z123.jpg` or `ABC-Z123_flop.jpg`
   - The renamed image is saved inside a subfolder of `photos/` based on the **first two letters** of the color code
+  - The original file is deleted from `images/`
 ### Example :
   - Color code: ABC
 ➜ Saved as: photos/AB/ABC-Z123.jpg 
-  - The original file is deleted from `images/`
 
 ## Features
 
