@@ -30,14 +30,13 @@ Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
 
       ├── images/ #Put your source photos here (jpg, png, etc.)
 
-      ├── photos/
-  Cropped & renamed photos are saved here
+      ├── photos/ #Cropped & renamed photos are saved here
 
       └── src/
 
-      └── app/
+          └── app/
 
-        └── ImageRenamerApp.java
+              └── ImageRenamerApp.java
 Main Java Swing application
 
 ## Usage
