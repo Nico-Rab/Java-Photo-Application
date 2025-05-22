@@ -26,15 +26,14 @@ Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
 
 ## Project Structure
 
-ImageRenamer/
+    ImageRenamer/
 
-    ├── images/
-Put your source photos here (jpg, png, etc.)
+      ├── images/ #Put your source photos here (jpg, png, etc.)
 
-    ├── photos/
+      ├── photos/
   Cropped & renamed photos are saved here
 
-    └── src/
+      └── src/
 
       └── app/
 
