@@ -62,7 +62,7 @@ In the automotive industry, each material sample is associated with a codified c
 
 ## Usage
 
-1. **Clone or download** this repository (see below).  
+1. **Clone or download** this repository.  
 2. **Open** Eclipse and **import** the folder as an **Existing Java Project**.  
 3. Ensure your source images live in the `images/` directory.  
 4. **Run** `app.ImageRenamerApp` as a Java Application.  
