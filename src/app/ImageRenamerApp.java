@@ -121,6 +121,8 @@ public class ImageRenamerApp extends JFrame {
         File f = canvas.getFile();
         if (f != null && f.delete()) {
             loadNext();
+            colorField.setText("");
+            grainField.setText("");
         } else {
             JOptionPane.showMessageDialog(this, "Delete failed.");
         }
@@ -149,6 +151,8 @@ public class ImageRenamerApp extends JFrame {
             ImageIO.write(crop, "JPEG", outFile);
             canvas.getFile().delete();
             loadNext();
+            colorField.setText("");
+            grainField.setText("");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Save failed: " + ex.getMessage());
         }
