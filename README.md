@@ -41,6 +41,8 @@ In the automotive industry, each material sample is associated with a codified c
   - **Ctrl + G** → Rename & load next  
   - **Esc** → Exit application  
 
+![Alt text](/project.gif)
+
 ## Prerequisites
 
 - Java 11 or higher installed  
