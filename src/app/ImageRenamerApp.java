@@ -1,5 +1,6 @@
 package app;
 
+// ======== Standard Imports ========
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -25,7 +26,6 @@ import java.util.Arrays;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
-import javax.swing.Box;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -34,36 +34,65 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
+/**
+ * ImageRenamerApp - Batch image cropping and renaming tool.
+ * <p>
+ * Provides a UI for users to apply a square crop, rotate, and optional horizontal flip, then rename images based on a 3-letter color code and grain
+ * code.
+ * </p>
+ *
+ * @author ProDev
+ * @version 1.0
+ */
 public class ImageRenamerApp extends JFrame {
+
+    // ======== Constants ========
     private static final String SOURCE_FOLDER = "images";
     private static final String DEST_FOLDER = "photos";
     private static final String[] IMAGE_EXTS = { "jpg", "jpeg", "png" };
-    private static final int CROP_SIZE = 200; // crop size in original pixels
 
+    // ======== Application State ========
     private File[] files;
     private int index = 0;
+    private int cropSize = 250;
 
-    private JTextField colorField = new JTextField(3);
-    private JTextField grainField = new JTextField(5);
-    private JCheckBox flopCheckbox = new JCheckBox("Flop?");
-    private JLabel filenameLabel = new JLabel();
-    private ImageCanvas canvas = new ImageCanvas();
+    // ======== UI Components ========
+    private final JTextField colorField = new JTextField(3);
+    private final JTextField grainField = new JTextField(5);
+    private final JCheckBox flopCheckbox = new JCheckBox("Flop?");
+    private JSlider cropSlider;
+    private final ImageCanvas canvas = new ImageCanvas();
 
+    // ======== Entry Point ========
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(ImageRenamerApp::new);
+    }
+
+    // ======== Constructor ========
     public ImageRenamerApp() {
         super("Image Renamer");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setUndecorated(true);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        new File(DEST_FOLDER).mkdirs();
+        configureFrame();
         loadFiles();
         initUI();
         loadNext();
     }
 
+    // ======== Frame Setup ========
+    private void configureFrame() {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        new File(DEST_FOLDER).mkdirs();
+    }
+
+    // ======== File Handling ========
     private void loadFiles() {
         File dir = new File(SOURCE_FOLDER);
         dir.mkdirs();
@@ -71,68 +100,9 @@ public class ImageRenamerApp extends JFrame {
             String lower = name.toLowerCase();
             return Arrays.stream(IMAGE_EXTS).anyMatch(lower::endsWith) && !name.contains("-");
         });
-        if (files == null)
+        if (files == null) {
             files = new File[0];
-    }
-
-    private void initUI() {
-        JPanel control = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        control.setBackground(Color.DARK_GRAY);
-        JLabel cLabel = new JLabel("Color:");
-        cLabel.setForeground(Color.WHITE);
-        JLabel gLabel = new JLabel("Grain:");
-        gLabel.setForeground(Color.WHITE);
-        flopCheckbox.setForeground(Color.WHITE);
-        flopCheckbox.setBackground(Color.DARK_GRAY);
-        JButton renameBtn = new JButton("Rename & Next");
-        JButton deleteBtn = new JButton("Delete");
-        filenameLabel.setForeground(Color.WHITE);
-
-        control.add(cLabel);
-        control.add(colorField);
-        control.add(gLabel);
-        control.add(grainField);
-        control.add(flopCheckbox);
-        control.add(renameBtn);
-        control.add(deleteBtn);
-        control.add(Box.createHorizontalStrut(20));
-        control.add(filenameLabel);
-
-        add(control, BorderLayout.NORTH);
-        add(canvas, BorderLayout.CENTER);
-
-        renameBtn.addActionListener(e -> renameAndNext());
-        deleteBtn.addActionListener(e -> deleteFile());
-
-        InputMap im = canvas.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        ActionMap am = canvas.getActionMap();
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "exit");
-        am.put("exit", new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK), "delete");
-        am.put("delete", new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                deleteFile();
-            }
-        });
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK), "flop");
-        am.put("flop", new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                flopCheckbox.setSelected(!flopCheckbox.isSelected());
-            }
-        });
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_DOWN_MASK), "rename");
-        am.put("rename", new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                renameAndNext();
-            }
-        });
-
-        pack();
-        setVisible(true);
+        }
     }
 
     private void loadNext() {
@@ -140,57 +110,157 @@ public class ImageRenamerApp extends JFrame {
             JOptionPane.showMessageDialog(this, "All images processed.");
             System.exit(0);
         }
-        File f = files[index++];
-        filenameLabel.setText(f.getName());
-        colorField.setText("");
-        grainField.setText("");
-        flopCheckbox.setSelected(false);
-        canvas.loadImage(f);
+        canvas.loadImage(files[index++]);
+        SwingUtilities.invokeLater(() -> {
+            colorField.requestFocusInWindow();
+            colorField.selectAll();
+        });
     }
 
     private void deleteFile() {
         File f = canvas.getFile();
-        if (f != null && f.delete())
+        if (f != null && f.delete()) {
             loadNext();
-        else
+        } else {
             JOptionPane.showMessageDialog(this, "Delete failed.");
+        }
     }
 
+    // ======== Image Renaming ========
     private void renameAndNext() {
         String color = colorField.getText().trim().toUpperCase();
-        if (color.length() != 3 || !color.matches("[A-Z]{3}")) {
+        if (!color.matches("[A-Z]{3}")) {
             JOptionPane.showMessageDialog(this, "Color must be 3 letters (e.g. FFA)");
             return;
         }
         String grain = grainField.getText().trim().toUpperCase();
         BufferedImage img = canvas.getImage();
         Rectangle rect = canvas.getCropRect();
-        if (img == null || rect == null)
+        if (img == null || rect == null) {
             return;
+        }
+
         BufferedImage crop = img.getSubimage(rect.x, rect.y, rect.width, rect.height);
         String base = color + "-" + grain + (flopCheckbox.isSelected() ? "_flop" : "");
-        String outName = base + ".jpg";
-        String prefix = color.substring(0, 2);
-        File outDir = new File(DEST_FOLDER, prefix);
+        File outDir = new File(DEST_FOLDER, color.substring(0, 2));
         outDir.mkdirs();
-        File outFile = new File(outDir, outName);
+        File outFile = new File(outDir, base + ".jpg");
         try {
             ImageIO.write(crop, "JPEG", outFile);
-            File src = canvas.getFile();
-            src.delete();
+            canvas.getFile().delete();
+            loadNext();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Save failed: " + ex.getMessage());
         }
-        loadNext();
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(ImageRenamerApp::new);
+    // ======== UI Setup ========
+    private void initUI() {
+        JPanel control = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        control.setBackground(Color.DARK_GRAY);
+
+        JLabel lblColor = createLabel("Color:");
+        JLabel lblGrain = createLabel("Grain:");
+        flopCheckbox.setForeground(Color.WHITE);
+        flopCheckbox.setBackground(Color.DARK_GRAY);
+
+        JButton btnRename = new JButton("Rename & Next");
+        JButton btnDelete = new JButton("Delete");
+
+        JLabel lblSlider = createLabel("Crop Size:");
+        setupCropSlider();
+
+        control.add(lblColor);
+        control.add(colorField);
+        control.add(lblGrain);
+        control.add(grainField);
+        control.add(flopCheckbox);
+        control.add(btnRename);
+        control.add(btnDelete);
+        control.add(lblSlider);
+        control.add(cropSlider);
+
+        add(control, BorderLayout.NORTH);
+        add(canvas, BorderLayout.CENTER);
+
+        btnRename.addActionListener(e -> renameAndNext());
+        btnDelete.addActionListener(e -> deleteFile());
+
+        setupKeyBindings();
+
+        pack();
+        setVisible(true);
+
+        canvas.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent e) {
+                canvas.layoutImage();
+                canvas.initCropRect();
+                canvas.repaint();
+                canvas.removeComponentListener(this);
+            }
+        });
     }
 
+    private void setupCropSlider() {
+        cropSlider = new JSlider(50, 500, cropSize);
+        cropSlider.setBackground(Color.DARK_GRAY);
+        cropSlider.setForeground(Color.WHITE);
+        cropSlider.setPaintTicks(true);
+        cropSlider.setPaintLabels(true);
+        cropSlider.setMajorTickSpacing(50);
+        cropSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                cropSize = cropSlider.getValue();
+                canvas.initCropRect();
+                canvas.repaint();
+            }
+        });
+    }
+
+    private JLabel createLabel(String text) {
+        JLabel lbl = new JLabel(text);
+        lbl.setForeground(Color.WHITE);
+        return lbl;
+    }
+
+    private void setupKeyBindings() {
+        InputMap im = canvas.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap am = canvas.getActionMap();
+
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "exit");
+        am.put("exit", new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK), "delete");
+        am.put("delete", new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                deleteFile();
+            }
+        });
+
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_DOWN_MASK), "rename");
+        am.put("rename", new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                renameAndNext();
+            }
+        });
+
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK), "flop");
+        am.put("flop", new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                flopCheckbox.setSelected(!flopCheckbox.isSelected());
+            }
+        });
+    }
+
+    // ======== Inner Class ========
     class ImageCanvas extends JPanel {
-        private BufferedImage orig;
-        private BufferedImage display;
+        private BufferedImage orig, display;
         private File file;
         private double zoom = 1.0;
         private Point offset = new Point(0, 0);
@@ -199,17 +269,24 @@ public class ImageRenamerApp extends JFrame {
 
         ImageCanvas() {
             setBackground(Color.BLACK);
+            setupMouseHandlers();
+        }
+
+        private void setupMouseHandlers() {
             MouseAdapter ma = new MouseAdapter() {
+                @Override
                 public void mousePressed(MouseEvent e) {
                     if (crop != null && crop.contains(e.getPoint())) {
                         dragStart = e.getPoint();
                     }
                 }
 
+                @Override
                 public void mouseReleased(MouseEvent e) {
                     dragStart = null;
                 }
 
+                @Override
                 public void mouseDragged(MouseEvent e) {
                     if (dragStart != null) {
                         int dx = e.getX() - dragStart.x;
@@ -221,6 +298,7 @@ public class ImageRenamerApp extends JFrame {
                     }
                 }
 
+                @Override
                 public void mouseWheelMoved(MouseWheelEvent e) {
                     zoom *= (e.getWheelRotation() < 0 ? 1.2 : 1 / 1.2);
                     zoom = Math.max(0.2, Math.min(5.0, zoom));
@@ -235,19 +313,17 @@ public class ImageRenamerApp extends JFrame {
 
         void loadImage(File f) {
             try {
-                // Read and rotate image upright
                 BufferedImage img = ImageIO.read(f);
                 if (img != null) {
-                    // Rotate 90° clockwise to correct orientation
                     int w = img.getWidth(), h = img.getHeight();
                     AffineTransform tx = new AffineTransform();
                     tx.translate(h / 2.0, w / 2.0);
                     tx.rotate(Math.toRadians(90));
                     tx.translate(-w / 2.0, -h / 2.0);
                     AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-                    BufferedImage rotated = new BufferedImage(h, w, img.getType());
-                    op.filter(img, rotated);
-                    img = rotated;
+                    BufferedImage rot = new BufferedImage(h, w, img.getType());
+                    op.filter(img, rot);
+                    img = rot;
                 }
                 orig = img;
             } catch (IOException ex) {
@@ -270,7 +346,6 @@ public class ImageRenamerApp extends JFrame {
             int h = (int) (orig.getHeight() * scale * zoom);
             display = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2 = display.createGraphics();
-            // High-quality rendering hints
             g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
             g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -282,7 +357,7 @@ public class ImageRenamerApp extends JFrame {
         }
 
         void initCropRect() {
-            int size = (int) (CROP_SIZE * zoom);
+            int size = (int) (cropSize * zoom);
             if (display != null) {
                 size = Math.min(size, Math.min(display.getWidth(), display.getHeight()));
                 int x = offset.x + (display.getWidth() - size) / 2;
@@ -322,8 +397,9 @@ public class ImageRenamerApp extends JFrame {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-            if (display != null)
+            if (display != null) {
                 g.drawImage(display, offset.x, offset.y, null);
+            }
             if (crop != null) {
                 g.setColor(Color.RED);
                 ((Graphics2D) g).setStroke(new BasicStroke(2));
