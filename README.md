@@ -31,7 +31,8 @@ In the automotive industry, each material sample is associated with a codified c
 
 - Images formats (`.jpg`, `.jpeg`, `.png`)
 - Not Compatable with `.HEIC` for iPhone pictures -> On your iPhone, open Settings → Camera → Formats. Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
-- **Resizable crop**: You can change the default crop size by modifying the `CROP_SIZE` value in the code  
+- Crop size slider
+- **Resizable crop**: If you don't like the default crop size, you can cahnge it by modifying the `CROP_SIZE` value in the code  
   ```java
   private static final int CROP_SIZE = 200; // change this to adjust default crop size
 - Keyboard shortcuts:  
