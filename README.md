@@ -51,15 +51,21 @@ In the automotive industry, each material sample is associated with a codified c
 
 ## Project Structure
 
-ColorCodePhotosApp/
+    ColorCodePhotosApp/
+
 ├── input_color/        # Put your source photos here (jpg, png, etc.; no “-” in filenames)
+
 ├── output_color/       # Cropped & renamed photos are saved here (auto-created)
+
 ├── backup_color/       # Originals (and any “deleted” images) move here (auto-created)
+
 └── src/
+
     └── main/
-        └── java/
-            └── app/
-                └── ColorCodePhotosApp.java  # Main Java Swing application
+    
+        └── app/
+        
+            └── ColorCodePhotosApp.java  # Main Java Swing application
 
 ## Usage
 
