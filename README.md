@@ -68,7 +68,8 @@ In the automotive industry, each material sample is associated with a codified c
 ## Usage
 
 1. **Clone or download** this repository.  
-2. Open Eclipse (e.g. Eclipse IDE for Java Developers).-   File → Import…
+2. Open Eclipse (e.g. Eclipse IDE for Java Developers).
+- File → Import…
 - Under General, choose Existing Projects into Workspace, then click Next.
 - Select Archive file (if you downloaded the ZIP) or Select root directory (if you unzipped).
 - If using ZIP: click Browse…, navigate to ColorCodePhotosApp.zip, and select it.
