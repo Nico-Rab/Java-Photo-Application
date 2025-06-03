@@ -53,15 +53,13 @@ In the automotive industry, each material sample is associated with a codified c
 
     ColorCodePhotosApp/
 
-├── input_color/        # Put your source photos here (jpg, png, etc.; no “-” in filenames)
+    ├── input_color/        # Put your source photos here (jpg, png, etc.; no “-” in filenames)
 
-├── output_color/       # Cropped & renamed photos are saved here (auto-created)
+    ├── output_color/       # Cropped & renamed photos are saved here (auto-created)
 
-├── backup_color/       # Originals (and any “deleted” images) move here (auto-created)
+    ├── backup_color/       # Originals (and any “deleted” images) move here (auto-created)
 
-└── src/
-
-    └── main/
+    └── src/
     
         └── app/
         
