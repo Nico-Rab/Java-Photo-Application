@@ -1,4 +1,4 @@
-# ImageRenamerApp
+# ColorCodePhotosApp
 
 A simple Java Swing application for batch-renaming and cropping photos with zoom, pan, and keyboard shortcuts.
 
@@ -11,7 +11,7 @@ In the automotive industry, each material sample is associated with a codified c
 
 ## ⚙️ How It Works
 
-- Reads photos from the `images/` folder  
+- Reads photos from the `input_color/` folder  
 - Displays them in fullscreen with zoom and pan functionality  
 - Automatically overlays a **movable** 1:1 square crop zone  
 - Lets the user enter:
@@ -21,17 +21,17 @@ In the automotive industry, each material sample is associated with a codified c
 - When the user presses `Ctrl + G` or clicks **Rename & Next**:
   - The crop area is extracted and saved as a new image
   - The image is renamed using the format: `ABC-Z123.jpg` or `ABC-Z123_flop.jpg`
-  - The renamed image is saved inside a subfolder of `photos/` based on the **first two letters** of the color code
-  - The original file is deleted from `images/`
+  - The renamed image is saved inside a subfolder of `output_color/` based on the **first two letters** of the color code
+  - The original file is moved to `trash_color/`
 ### Example :
   - Color code: ABC
-➜ Saved as: photos/AB/ABC-Z123.jpg 
+➜ Saved as: output_color/AB/ABC-Z123.jpg 
 
 ## Features
 
 - Images formats (`.jpg`, `.jpeg`, `.png`)
 - Not Compatable with `.HEIC` for iPhone pictures -> On your iPhone, open Settings → Camera → Formats. Select “Most Compatible” (JPEG) instead of High Efficiency (HEIC).
-- Crop size slider
+- Crop size slider (50–500 px)
 - **Resizable crop**: If you don't like the default crop size, you can cahnge it by modifying the `CROP_SIZE` value in the code  
   ```java
   private static final int CROP_SIZE = 200; // change this to adjust default crop size
@@ -47,21 +47,19 @@ In the automotive industry, each material sample is associated with a codified c
 
 - Java 11 or higher installed  
 - Eclipse IDE 2023-06 (or any recent Eclipse)  
-- Image files in `images/` folder  
+- Image files in `input_color/` folder  
 
 ## Project Structure
 
-    ImageRenamer/
-
-          ├── images/ #Put your source photos here (jpg, png, etc.)
-
-          ├── photos/ #Cropped & renamed photos are saved here
-
-          └── src/
-
-              └── app/
-
-                    └── ImageRenamerApp.java #Main Java Swing application
+ColorCodePhotosApp/
+├── input_color/        # Put your source photos here (jpg, png, etc.; no “-” in filenames)
+├── output_color/       # Cropped & renamed photos are saved here (auto-created)
+├── backup_color/       # Originals (and any “deleted” images) move here (auto-created)
+└── src/
+    └── main/
+        └── java/
+            └── app/
+                └── ColorCodePhotosApp.java  # Main Java Swing application
 
 ## Usage
 
