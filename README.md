@@ -69,12 +69,12 @@ In the automotive industry, each material sample is associated with a codified c
 
 1. **Clone or download** this repository.  
 2. Open Eclipse (e.g. Eclipse IDE for Java Developers).
--- File → Import…
--- Under General, choose Existing Projects into Workspace, then click Next.
--- Select Archive file (if you downloaded the ZIP) or Select root directory (if you unzipped).
--- If using ZIP: click Browse…, navigate to ColorCodePhotosApp.zip, and select it.
--- If using unzipped folder: click Browse…, navigate to the folder ColorCodePhotosApp, and select it.
--- Eclipse will detect the project. Make sure ColorCodePhotosApp is checked, then click Finish.  
+  - File → Import…
+  - Under General, choose Existing Projects into Workspace, then click Next.
+  - Select Archive file (if you downloaded the ZIP) or Select root directory (if you unzipped).
+  - If using ZIP: click Browse…, navigate to ColorCodePhotosApp.zip, and select it.
+  - If using unzipped folder: click Browse…, navigate to the folder ColorCodePhotosApp, and select it.
+  - Eclipse will detect the project. Make sure ColorCodePhotosApp is checked, then click Finish.  
 3. Ensure your source images live in the `input_color/` directory.  
 4. **Run** `app.ImageRenamerApp` as a Java Application.  
 5. Use the toolbar or shortcuts to rename, crop, delete, and advance.
