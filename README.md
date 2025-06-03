@@ -67,7 +67,7 @@ In the automotive industry, each material sample is associated with a codified c
 
 ## Usage
 
-1. **Clone or download** this repository.  
+1. **Clone or download** the zip file.  
 2. Open Eclipse (e.g. Eclipse IDE for Java Developers).
 - File → Import…
 - Under General, choose Existing Projects into Workspace, then click Next.
