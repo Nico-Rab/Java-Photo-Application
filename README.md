@@ -84,7 +84,3 @@ In the automotive industry, each material sample is associated with a codified c
 
 If you encounter any bugs or issues, feel free to report them or reach out via my website contact form here:  
 👉 [Send me a message](https://nico-rab.tech/#contact) !
-
-## License
-
-This project is released under the [MIT License](LICENSE).
