@@ -75,9 +75,10 @@ In the automotive industry, each material sample is associated with a codified c
 - If using ZIP: click Browse…, navigate to ColorCodePhotosApp.zip, and select it.
 - If using unzipped folder: click Browse…, navigate to the folder ColorCodePhotosApp, and select it.
 - Eclipse will detect the project. Make sure ColorCodePhotosApp is checked, then click Finish.  
-3. Ensure your source images live in the `input_color/` directory.  
-4. **Run** `app.ImageRenamerApp` as a Java Application.  
-5. Use the toolbar or shortcuts to rename, crop, delete, and advance.
+3. Ensure your source images live in the `input_color/` directory.
+4. Right click ColorPhotosApp under the Project Explorer menu on the right.
+5. **Run as** a Java Application. 
+6. Use the toolbar or shortcuts to rename, crop, delete, and advance.
 
 ## Contact
 
