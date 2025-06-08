@@ -55,9 +55,9 @@ In the automotive industry, each material sample is associated with a codified c
 
     ├── input_color/        # Put your source photos here (jpg, png, etc.)
 
-    ├── output_color/       # Cropped & renamed photos are saved here (auto-created)
+    ├── output_color/       # Cropped & renamed photos are saved here 
 
-    ├── trash_color/        # Originals (and any “deleted” images) move here (auto-created)
+    ├── trash_color/        # “deleted” images get moved here if you made a mistake and want to retake it
 
     └── src/
     
